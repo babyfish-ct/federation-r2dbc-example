@@ -1,0 +1,20 @@
+server:
+  port:
+    4002
+
+graphql:
+  packages:
+    - org.babyfish.example.federation.r2dbc.employee
+
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem:///user_employee_db?options=DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          r2dbc: DEBUG
