@@ -1,4 +1,4 @@
-package org.babyfish.example.federation.r2dbc.employee.loader
+package org.babyfish.example.federation.r2dbc.employee.common
 
 import com.expediagroup.graphql.server.execution.DataLoaderRegistryFactory
 import org.dataloader.DataLoader

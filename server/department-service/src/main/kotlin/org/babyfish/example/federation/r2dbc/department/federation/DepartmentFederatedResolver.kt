@@ -39,7 +39,6 @@ open class DepartmentFederatedResolver(
         val departmentMap =
             departmentRepository
                 .findAllById(ids.distinct())
-                .asFlow()
                 .toList()
                 .associateBy { it.id }
         return ids.map { departmentMap[it] }

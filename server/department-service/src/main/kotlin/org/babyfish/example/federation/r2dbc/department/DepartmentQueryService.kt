@@ -14,11 +14,8 @@ open class DepartmentQueryService(
     open suspend fun findDepartments(): List<Department> =
         departmentRepository
             .findAll()
-            .asFlow()
             .toList()
 
     open suspend fun findDepartmentByName(name: String): Department? =
-        departmentRepository
-            .findByName(name)
-            .awaitFirstOrNull()
+        departmentRepository.findByName(name)
 }

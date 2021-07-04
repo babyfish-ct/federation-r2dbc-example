@@ -5,8 +5,8 @@ import com.expediagroup.graphql.generator.federation.directives.ExternalDirectiv
 import com.expediagroup.graphql.generator.federation.directives.FieldSet
 import com.expediagroup.graphql.generator.federation.directives.KeyDirective
 import graphql.schema.DataFetchingEnvironment
+import org.babyfish.example.federation.r2dbc.employee.common.load
 import org.babyfish.example.federation.r2dbc.employee.loader.EmployeeByDepartmentLoader
-import org.babyfish.example.federation.r2dbc.employee.loader.mappedDataLoader
 import java.util.concurrent.CompletableFuture
 
 @KeyDirective(fields = FieldSet("id"))
@@ -24,7 +24,5 @@ class Department(
     fun employees(
         env: DataFetchingEnvironment
     ): CompletableFuture<List<Employee>> =
-        env
-            .mappedDataLoader(EmployeeByDepartmentLoader::class)
-            .load(id)
+        env.load(id, EmployeeByDepartmentLoader::class)
 }

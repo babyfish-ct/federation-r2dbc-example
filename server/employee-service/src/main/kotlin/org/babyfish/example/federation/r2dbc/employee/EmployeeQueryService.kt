@@ -13,6 +13,5 @@ class EmployeeQueryService(
     suspend fun findEmployees(): List<Employee> =
         employeeRepository
             .findAll()
-            .asFlow()
             .toList()
 }

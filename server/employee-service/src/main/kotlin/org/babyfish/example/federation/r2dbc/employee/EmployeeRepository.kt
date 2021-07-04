@@ -1,14 +1,11 @@
 package org.babyfish.example.federation.r2dbc.employee
 
-import org.springframework.data.r2dbc.repository.R2dbcRepository
-import reactor.core.publisher.Flux
+import kotlinx.coroutines.flow.Flow
+import org.springframework.data.repository.kotlin.CoroutineCrudRepository
 
-/*
- * See "@EnableR2dbcRepositories" on App
- */
-interface EmployeeRepository : R2dbcRepository<Employee, Long> {
+interface EmployeeRepository : CoroutineCrudRepository<Employee, Long> {
 
     fun findAllByDepartmentIdIn(
         departmentIds: Collection<Long>
-    ): Flux<Employee>
+    ): Flow<Employee>
 }
