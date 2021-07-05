@@ -8,3 +8,5 @@ create table department(
 insert into department(id, name) values(1, 'Develop');
 
 insert into department(id, name) values(2, 'Test');
+
+insert into department(id, name) values(3, 'Document');

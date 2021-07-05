@@ -4,9 +4,7 @@ import kotlinx.coroutines.flow.toList
 import org.babyfish.example.federation.r2dbc.employee.Employee
 import org.babyfish.example.federation.r2dbc.employee.EmployeeRepository
 import org.babyfish.example.federation.r2dbc.employee.common.AbstractBatchLoader
-import org.dataloader.MappedBatchLoader
 import org.springframework.stereotype.Component
-import java.util.concurrent.CompletionStage
 
 @Component
 open class EmployeeByDepartmentLoader(
@@ -20,7 +18,4 @@ open class EmployeeByDepartmentLoader(
             .findAllByDepartmentIdIn(keys)
             .toList()
             .groupBy { it.departmentId }
-
-    override val absentValue: List<Employee>?
-        get() = emptyList()
 }

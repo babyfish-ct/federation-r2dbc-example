@@ -11,28 +11,9 @@ abstract class AbstractBatchLoader<K, V> : MappedBatchLoader<K, V> {
     override fun load(keys: Set<K>): CompletionStage<Map<K, V>> =
         GlobalScope
             .async {
-                onLoad(keys).let {
-                    val absentValue = absentValue
-                    if (absentValue !== null) {
-                        val missedKeys = keys - it.keys
-                        if (missedKeys.isNotEmpty()) {
-                            val mutableMap = if (it is MutableMap<*, *>) {
-                                it as MutableMap<K, V>
-                            } else {
-                                it.toMutableMap()
-                            }
-                            for (missedKey in missedKeys) {
-                                mutableMap[missedKey] = absentValue
-                            }
-                            return@let mutableMap
-                        }
-                    }
-                    it
-                }
+                onLoad(keys)
             }
             .asCompletableFuture()
 
     protected abstract suspend fun onLoad(keys: Set<K>): Map<K, V>
-
-    protected open val absentValue : V? = null
 }

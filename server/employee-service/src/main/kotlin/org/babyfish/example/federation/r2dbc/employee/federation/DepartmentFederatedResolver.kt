@@ -30,7 +30,9 @@ open class DepartmentFederatedResolver : FederatedTypeResolver<Department> {
         environment: DataFetchingEnvironment,
         representations: List<Map<String, Any>>
     ): List<Department?> {
-        val ids = representations.map{ (it["id"] as Number).toLong() }
+        val ids = representations
+            .filter { it["__typename"] == Department::class.simpleName }
+            .map{ (it["id"] as Number).toLong() }
         return ids.map { Department(it) }
     }
 }
