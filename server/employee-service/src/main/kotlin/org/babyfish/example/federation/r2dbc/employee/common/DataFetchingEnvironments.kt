@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 fun <K, V, L: MappedBatchLoader<K, V>> DataFetchingEnvironment.required(
     mappedBatchLoaderType: KClass<L>,
     key: K,
-    defaultValueGetter: () -> V = { error("") }
+    defaultValueGetter: () -> V = { error("Required data is missing") }
 ): CompletableFuture<V> =
     optional(mappedBatchLoaderType, key).thenApply {
         it ?: defaultValueGetter()
